@@ -83,7 +83,7 @@ public sealed class Startup
         app.UseRouting();
 
         app.UseMiddleware<ResponseTimeMiddleware>();
-        app.UseMiddleware<StudentInfoHeadersMiddleware>("РИ-240948", "Кулешов Илья Алексеевич");
+        app.UseMiddleware<StudentInfoHeadersMiddleware>("RI-240948", "Kuleshov Ilya Alekseevich");
 
         app.UseEndpoints(endpoints =>
         {
