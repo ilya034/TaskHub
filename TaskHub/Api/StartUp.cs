@@ -1,3 +1,4 @@
+using Api.Middlewares;
 using Api.UseCases.Users;
 using Api.UseCases.Users.Interfaces;
 using Dal;
@@ -80,6 +81,9 @@ public sealed class Startup
         }
 
         app.UseRouting();
+
+        app.UseMiddleware<ResponseTimeMiddleware>();
+        app.UseMiddleware<StudentInfoHeadersMiddleware>("RI-240948", "Kuleshov Ilya Alekseevich");
 
         app.UseEndpoints(endpoints =>
         {
