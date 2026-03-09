@@ -1,5 +1,6 @@
 using Api.UseCases.Users;
 using Api.UseCases.Users.Interfaces;
+using Api.DependencyInjection;
 using Dal;
 using Logic;
 using Microsoft.OpenApi.Models;
@@ -38,6 +39,7 @@ public sealed class Startup
         services.AddLogic();
         
         services.AddScoped<IManageUserUseCase, ManageUserUseCase>();
+        services.AddDiLifecycleDemoServices();
         
         services.AddCors(options =>
         {
