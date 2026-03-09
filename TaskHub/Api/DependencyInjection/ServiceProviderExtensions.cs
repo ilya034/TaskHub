@@ -9,6 +9,6 @@ public static class ServiceProviderExtensions
         TService second = serviceProvider.GetRequiredService<TService>();
 
         Console.WriteLine(
-            $"{typeof(TService).Name}: first={first.InstanceId}, second={second.InstanceId}, same={ReferenceEquals(first, second)}");
+            $"{typeof(TService).Name}: first={first.InstanceId}, second={second.InstanceId}, same={ReferenceEquals(first, second)}\n");
     }
 }
