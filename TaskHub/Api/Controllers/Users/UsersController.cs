@@ -10,6 +10,7 @@ namespace Api.Controllers.Users;
 /// </summary>
 [ApiController]
 [Route("users")]
+[StudentInfoHeaders("Kuleshov Ilya", "RI-240948")]
 public sealed class UsersController : ControllerBase
 {
     /// <summary>
