@@ -1,3 +1,5 @@
+using Api.UseCases.Tasks;
+using Api.UseCases.Tasks.Interfaces;
 using Api.UseCases.Users;
 using Api.UseCases.Users.Interfaces;
 using Dal;
@@ -38,6 +40,12 @@ public sealed class Startup
         services.AddLogic();
         
         services.AddScoped<IManageUserUseCase, ManageUserUseCase>();
+        services.AddScoped<ICreateTaskUseCase, CreateTaskUseCase>();
+        services.AddScoped<IGetTasksUseCase, GetTasksUseCase>();
+        services.AddScoped<IGetTaskUseCase, GetTaskUseCase>();
+        services.AddScoped<ISetTaskTitleUseCase, SetTaskTitleUseCase>();
+        services.AddScoped<IDeleteTaskUseCase, DeleteTaskUseCase>();
+        services.AddScoped<IDeleteTasksUseCase, DeleteTasksUseCase>();
         
         services.AddCors(options =>
         {
