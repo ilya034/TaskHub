@@ -9,27 +9,11 @@ namespace Api.Controllers.Tasks;
 [Route("tasks")]
 public sealed class TasksController : ControllerBase
 {
-    private readonly ICreateTaskUseCase _createTaskUseCase;
-    private readonly IGetTasksUseCase _getTasksUseCase;
-    private readonly IGetTaskUseCase _getTaskUseCase;
-    private readonly ISetTaskTitleUseCase _setTaskTitleUseCase;
-    private readonly IDeleteTaskUseCase _deleteTaskUseCase;
-    private readonly IDeleteTasksUseCase _deleteTasksUseCase;
+    private readonly IManageTaskUseCase _taskUseCase;
 
-    public TasksController(
-        ICreateTaskUseCase createTaskUseCase,
-        IGetTasksUseCase getTasksUseCase,
-        IGetTaskUseCase getTaskUseCase,
-        ISetTaskTitleUseCase setTaskTitleUseCase,
-        IDeleteTaskUseCase deleteTaskUseCase,
-        IDeleteTasksUseCase deleteTasksUseCase)
+    public TasksController(IManageTaskUseCase taskUseCase)
     {
-        _createTaskUseCase = createTaskUseCase;
-        _getTasksUseCase = getTasksUseCase;
-        _getTaskUseCase = getTaskUseCase;
-        _setTaskTitleUseCase = setTaskTitleUseCase;
-        _deleteTaskUseCase = deleteTaskUseCase;
-        _deleteTasksUseCase = deleteTasksUseCase;
+        _taskUseCase = taskUseCase;
     }
 
     [HttpPost]
@@ -37,7 +21,7 @@ public sealed class TasksController : ControllerBase
         [FromBody] CreateTaskRequest? request,
         CancellationToken cancellationToken)
     {
-        var task = await _createTaskUseCase.CreateTaskAsync(
+        var task = await _taskUseCase.CreateTaskAsync(
             request!.Title,
             request.CreatedByUserId,
             cancellationToken);
@@ -48,14 +32,14 @@ public sealed class TasksController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<TaskListResponse>> GetAllTasksAsync(CancellationToken cancellationToken)
     {
-        var response = await _getTasksUseCase.GetAllTasksAsync(cancellationToken);
+        var response = await _taskUseCase.GetAllTasksAsync(cancellationToken);
         return Ok(response);
     }
 
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<TaskResponse>> GetTaskByIdAsync([FromRoute] Guid id, CancellationToken cancellationToken)
     {
-        var taskResponse = await _getTaskUseCase.GetTaskByIdAsync(id, cancellationToken);
+        var taskResponse = await _taskUseCase.GetTaskByIdAsync(id, cancellationToken);
 
         if (taskResponse is null)
         {
@@ -71,14 +55,14 @@ public sealed class TasksController : ControllerBase
         [FromBody] SetTaskTitleRequest? request,
         CancellationToken cancellationToken)
     {
-        await _setTaskTitleUseCase.SetTaskTitleAsync(id, request!.Title, cancellationToken);
+        await _taskUseCase.SetTaskTitleAsync(id, request!.Title, cancellationToken);
         return NoContent();
     }
 
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> DeleteTaskByIdAsync([FromRoute] Guid id, CancellationToken cancellationToken)
     {
-        var deleted = await _deleteTaskUseCase.DeleteTaskByIdAsync(id, cancellationToken);
+        var deleted = await _taskUseCase.DeleteTaskByIdAsync(id, cancellationToken);
         if (deleted == false)
         {
             return NotFound();
@@ -90,7 +74,7 @@ public sealed class TasksController : ControllerBase
     [HttpDelete]
     public async Task<IActionResult> DeleteAllTasksAsync(CancellationToken cancellationToken)
     {
-        await _deleteTasksUseCase.DeleteAllTasksAsync(cancellationToken);
+        await _taskUseCase.DeleteAllTasksAsync(cancellationToken);
         return NoContent();
     }
 }

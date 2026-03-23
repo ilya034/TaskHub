@@ -40,12 +40,7 @@ public sealed class Startup
         services.AddLogic();
         
         services.AddScoped<IManageUserUseCase, ManageUserUseCase>();
-        services.AddScoped<ICreateTaskUseCase, CreateTaskUseCase>();
-        services.AddScoped<IGetTasksUseCase, GetTasksUseCase>();
-        services.AddScoped<IGetTaskUseCase, GetTaskUseCase>();
-        services.AddScoped<ISetTaskTitleUseCase, SetTaskTitleUseCase>();
-        services.AddScoped<IDeleteTaskUseCase, DeleteTaskUseCase>();
-        services.AddScoped<IDeleteTasksUseCase, DeleteTasksUseCase>();
+        services.AddScoped<IManageTaskUseCase, ManageTaskUseCase>();
         
         services.AddCors(options =>
         {
