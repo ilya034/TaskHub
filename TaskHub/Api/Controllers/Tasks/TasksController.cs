@@ -26,7 +26,7 @@ public sealed class TasksController : ControllerBase
             request.CreatedByUserId,
             cancellationToken);
 
-        return CreatedAtAction(nameof(GetTaskByIdAsync), new { id = task.Id }, task);
+        return Ok(task);
     }
 
     [HttpGet]
