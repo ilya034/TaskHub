@@ -4,10 +4,8 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Api.Filters;
 
-public sealed class ValidateSetTaskTitleRequestFilter : IAsyncActionFilter, IOrderedFilter
+public sealed class ValidateSetTaskTitleRequestFilter : IAsyncActionFilter
 {
-    public int Order => -28;
-
     public Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
         if (context.ActionArguments.TryGetValue("request", out var actionArgument) == false ||

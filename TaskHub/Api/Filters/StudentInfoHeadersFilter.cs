@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Api.Filters;
 
-public sealed class StudentInfoHeadersFilter : IAsyncActionFilter, IOrderedFilter
+public sealed class StudentInfoHeadersFilter : IAsyncActionFilter
 {
     private readonly string _studentName;
     private readonly string _studentGroup;
@@ -12,8 +12,6 @@ public sealed class StudentInfoHeadersFilter : IAsyncActionFilter, IOrderedFilte
         _studentName = studentName;
         _studentGroup = studentGroup;
     }
-
-    public int Order => -29;
 
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {

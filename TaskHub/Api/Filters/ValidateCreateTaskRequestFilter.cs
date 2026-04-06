@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Api.Filters;
 
-public class ValidateCreateTaskRequestFilter : IAsyncActionFilter, IOrderedFilter
+public sealed class ValidateCreateTaskRequestFilter : IAsyncActionFilter, IOrderedFilter
 {
     public int Order => -28;
 

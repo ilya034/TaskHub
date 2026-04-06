@@ -41,6 +41,8 @@ public sealed class Startup
         services.AddLogic();
 
         services.AddScoped<RequestLoggingFilter>();
+        services.AddScoped<ValidateCreateTaskRequestFilter>();
+        services.AddScoped<ValidateSetTaskTitleRequestFilter>();
         services.AddScoped<IManageUserUseCase, ManageUserUseCase>();
         services.AddScoped<IManageTaskUseCase, ManageTaskUseCase>();
         

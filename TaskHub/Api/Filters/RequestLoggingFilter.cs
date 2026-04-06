@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Api.Filters;
 
-public sealed class RequestLoggingFilter : IAsyncActionFilter, IOrderedFilter
+public sealed class RequestLoggingFilter : IAsyncActionFilter
 {
     private readonly ILogger<RequestLoggingFilter> _logger;
 
@@ -12,8 +12,6 @@ public sealed class RequestLoggingFilter : IAsyncActionFilter, IOrderedFilter
     {
         _logger = logger;
     }
-
-    public int Order => -30;
 
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
