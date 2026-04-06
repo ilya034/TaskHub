@@ -13,5 +13,5 @@ public record CreateTaskRequest
     /// <summary>
     /// User identifier who created the task
     /// </summary>
-    public required Guid CreatedByUserId { get; init; }
+    public Guid CreatedByUserId { get; init; }
 }
