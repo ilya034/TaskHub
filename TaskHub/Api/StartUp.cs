@@ -1,3 +1,4 @@
+using Api.Filters;
 using Api.UseCases.Tasks;
 using Api.UseCases.Tasks.Interfaces;
 using Api.UseCases.Users;
@@ -38,7 +39,8 @@ public sealed class Startup
         services.AddControllers();
         services.AddDal();
         services.AddLogic();
-        
+
+        services.AddScoped<RequestLoggingFilter>();
         services.AddScoped<IManageUserUseCase, ManageUserUseCase>();
         services.AddScoped<IManageTaskUseCase, ManageTaskUseCase>();
         

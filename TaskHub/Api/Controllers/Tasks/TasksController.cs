@@ -1,3 +1,4 @@
+using Api.Filters;
 using Api.Controllers.Tasks.Request;
 using Api.Controllers.Tasks.Response;
 using Api.UseCases.Tasks.Interfaces;
@@ -7,6 +8,8 @@ namespace Api.Controllers.Tasks;
 
 [ApiController]
 [Route("tasks")]
+[ServiceFilter(typeof(RequestLoggingFilter))]
+[TypeFilter(typeof(StudentInfoHeadersFilter), Arguments = new object[] { "Kuleshov Ilya", "RI-240948" })]
 public sealed class TasksController : ControllerBase
 {
     private readonly IManageTaskUseCase _taskUseCase;
@@ -17,6 +20,7 @@ public sealed class TasksController : ControllerBase
     }
 
     [HttpPost]
+    [ServiceFilter(typeof(ValidateCreateTaskRequestFilter))]
     public async Task<ActionResult<TaskResponse>> CreateTaskAsync(
         [FromBody] CreateTaskRequest? request,
         CancellationToken cancellationToken)
@@ -50,6 +54,7 @@ public sealed class TasksController : ControllerBase
     }
 
     [HttpPut("{id:guid}/title")]
+    [ServiceFilter(typeof(ValidateSetTaskTitleRequestFilter))]
     public async Task<IActionResult> SetTaskTitleAsync(
         [FromRoute] Guid id,
         [FromBody] SetTaskTitleRequest? request,
