@@ -11,21 +11,10 @@ public sealed class ValidateSetTaskTitleRequestFilter : IAsyncActionFilter
         if (context.ActionArguments.TryGetValue("request", out var actionArgument) == false ||
             actionArgument is not SetTaskTitleRequest request)
         {
-            context.Result = CreateBadRequest("Тело запроса отсутствует");
-            return Task.CompletedTask;
-        }
-
-        if (string.IsNullOrWhiteSpace(request.Title))
-        {
-            context.Result = CreateBadRequest("Название задачи не задано");
+            context.Result = new BadRequestObjectResult("Тело запроса отсутствует");
             return Task.CompletedTask;
         }
 
         return next();
-    }
-
-    private static BadRequestObjectResult CreateBadRequest(string message)
-    {
-        return new(message);
     }
 }
